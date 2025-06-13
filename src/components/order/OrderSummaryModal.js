@@ -12,7 +12,7 @@ const OrderSummaryModal = ({ show, onHide, order }) => {
       try {
         const productDetails = await Promise.all(
           order.productsOrdered.map(async (p) => {
-            const res = await axios.get(`http://localhost:4000/products/${p.productId}`);
+            const res = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/products/${p.productId}`);
             return {
               ...p,
               productInfo: res.data,
