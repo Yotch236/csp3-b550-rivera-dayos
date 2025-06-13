@@ -68,7 +68,7 @@ const EditProductModal = ({ show, onHide, onSave, product }) => {
         formData.append("image", editedProduct.image);
       }
 
-      const res = await axios.patch(`http://localhost:4000/products/${product._id}/update`, formData, {
+      const res = await axios.patch(`${process.env.REACT_APP_API_BASE_URL}/products/${product._id}/update`, formData, {
         headers: {
           "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${localStorage.getItem("token")}`,

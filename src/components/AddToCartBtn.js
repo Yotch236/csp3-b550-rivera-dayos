@@ -35,7 +35,7 @@ const AddToCartBtn = ({ productId, stock, quantity = 1, cartItems, refreshCart }
     setLoading(true);
     try {
       const response = await axios.post(
-        `http://localhost:4000/cart/add-to-cart`,
+        `${process.env.REACT_APP_API_BASE_URL}/cart/add-to-cart`,
         { productId, quantity },
         {
           headers: {

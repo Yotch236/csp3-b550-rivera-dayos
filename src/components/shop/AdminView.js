@@ -28,7 +28,7 @@ const AdminView = ({ products, fetchProducts }) => {
     else if (status === "trending") reqBody.sortByTotalSold = true;
 
     axios
-      .post(`http://localhost:4000/products/search`, reqBody)
+      .post(`${process.env.REACT_APP_API_BASE_URL}/products/search`, reqBody)
       .then((res) => {
         if (res.status === 200) setProductList(res.data);
       })

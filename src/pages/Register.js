@@ -110,7 +110,7 @@ const Register = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await axios.post("http://localhost:4000/users/register", formData);
+      const res = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/users/register`, formData);
       console.log("Registration successful:", res.data);
       // redirect or show message
 

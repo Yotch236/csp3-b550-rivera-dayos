@@ -46,7 +46,7 @@ const Cart = () => {
 
     try {
       await axios.patch(
-        `http://localhost:4000/cart/update-item-quantity`,
+        `${process.env.REACT_APP_API_BASE_URL}/cart/update-item-quantity`,
         { productId, quantity: newQty },
         {
           headers: {

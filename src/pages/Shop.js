@@ -11,7 +11,7 @@ const Shop = () => {
 
   const fetchProducts = useCallback(async () => {
     try {
-      const url = user?.isAdmin ? `http://localhost:4000/products/all` : `http://localhost:4000/products/active`;
+      const url = user?.isAdmin ? `${process.env.REACT_APP_API_BASE_URL}/products/all` : `${process.env.REACT_APP_API_BASE_URL}/products/active`;
 
       const res = await axios.get(url, {
         headers: {

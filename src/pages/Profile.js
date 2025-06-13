@@ -123,7 +123,7 @@ const Profile = () => {
     setLoading(true);
     try {
       const res = await axios.patch(
-        "http://localhost:4000/users/details",
+        `${process.env.REACT_APP_API_BASE_URL}/users/details`,
         { ...formData },
         {
           headers: {

@@ -17,7 +17,7 @@ const Trending = () => {
 
   const fetchTrendingProducts = async () => {
     try {
-      const res = await axios.get(`http://localhost:4000/products/trending`);
+      const res = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/products/trending`);
       setTrending(res.data);
     } catch (error) {
       console.log(error);
