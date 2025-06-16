@@ -28,7 +28,11 @@ const AdminView = ({ products, fetchProducts }) => {
     else if (status === "trending") reqBody.sortByTotalSold = true;
 
     axios
-      .post(`${process.env.REACT_APP_API_BASE_URL}/products/search`, reqBody)
+      .post(`${process.env.REACT_APP_API_BASE_URL}/products/search`, reqBody, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      })
       .then((res) => {
         if (res.status === 200) setProductList(res.data);
       })
@@ -82,8 +86,9 @@ const AdminView = ({ products, fetchProducts }) => {
       });
       formPayload.append("isActive", true);
 
-      const response = await axios.post("http://localhost:4000/products/", formPayload, {
+      const response = await axios.post("${process.env.REACT_APP_API_BASE_URL}/products/", formPayload, {
         headers: {
+          "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
@@ -124,8 +129,9 @@ const AdminView = ({ products, fetchProducts }) => {
     if (!result.isConfirmed) return;
 
     try {
-      const response = await axios.delete(`http://localhost:4000/products/${id}/delete`, {
+      const response = await axios.delete(`${process.env.REACT_APP_API_BASE_URL}/products/${id}/delete`, {
         headers: {
+          "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
@@ -160,14 +166,15 @@ const AdminView = ({ products, fetchProducts }) => {
 
     try {
       const url = product.isActive
-        ? `http://localhost:4000/products/${product._id}/archive`
-        : `http://localhost:4000/products/${product._id}/activate`;
+        ? `${process.env.REACT_APP_API_BASE_URL}/products/${product._id}/archive`
+        : `${process.env.REACT_APP_API_BASE_URL}/products/${product._id}/activate`;
 
       const response = await axios.patch(
         url,
         {},
         {
           headers: {
+            "Content-Type": "application/json",
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         }
@@ -285,7 +292,7 @@ const AdminView = ({ products, fetchProducts }) => {
                     >
                       <div className="product-image-wrapper position-relative">
                         <img
-                          src={`http://localhost:4000${image}`}
+                          src={`${process.env.REACT_APP_API_BASE_URL}${image}`}
                           alt={name}
                           className={`product-image w-100 ${stock === 0 ? "blur-image" : ""}`}
                         />

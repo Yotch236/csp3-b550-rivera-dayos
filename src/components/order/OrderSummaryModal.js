@@ -67,7 +67,7 @@ const OrderSummaryModal = ({ show, onHide, order }) => {
                     <tr key={i}>
                       <td>
                         <Image
-                          src={`http://localhost:4000${item.productInfo.image}`}
+                          src={`${process.env.REACT_APP_API_BASE_URL}${item.productInfo.image}`}
                           alt={item.productInfo.name}
                           thumbnail
                           style={{ maxWidth: "80px" }}

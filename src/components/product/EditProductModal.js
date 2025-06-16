@@ -25,7 +25,7 @@ const EditProductModal = ({ show, onHide, onSave, product }) => {
         isActive: product.isActive !== false,
         stock: product.stock || 0,
         image: null,
-        previewImage: product.image ? `http://localhost:4000${product.image}` : "",
+        previewImage: product.image ? `${process.env.REACT_APP_API_BASE_URL}${product.image}` : "",
         category: product.category || "",
       });
     }
@@ -70,7 +70,7 @@ const EditProductModal = ({ show, onHide, onSave, product }) => {
 
       const res = await axios.patch(`${process.env.REACT_APP_API_BASE_URL}/products/${product._id}/update`, formData, {
         headers: {
-          "Content-Type": "multipart/form-data",
+          "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });

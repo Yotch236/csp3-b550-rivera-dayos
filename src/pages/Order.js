@@ -26,9 +26,13 @@ const Order = () => {
     const fetchOrders = async () => {
       setLoading(true);
       try {
-        const url = user && user.isAdmin ? `${process.env.REACT_APP_API_BASE_URL}/orders/all-orders` : `${process.env.REACT_APP_API_BASE_URL}/orders/`;
+        const url =
+          user && user.isAdmin
+            ? `${process.env.REACT_APP_API_BASE_URL}/orders/all-orders`
+            : `${process.env.REACT_APP_API_BASE_URL}/orders/`;
         const res = await axios.get(url, {
           headers: {
+            "Content-Type": "application/json",
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         });

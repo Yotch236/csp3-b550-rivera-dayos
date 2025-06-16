@@ -39,6 +39,7 @@ const AddToCartBtn = ({ productId, stock, quantity = 1, cartItems, refreshCart }
         { productId, quantity },
         {
           headers: {
+            "Content-Type": "application/json",
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         }

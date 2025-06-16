@@ -8,8 +8,9 @@ const CartProvider = ({ children }) => {
 
   const fetchCart = useCallback(async () => {
     try {
-      const res = await axios.get("http://localhost:4000/cart/get-cart", {
+      const res = await axios.get("${process.env.REACT_APP_API_BASE_URL}/cart/get-cart", {
         headers: {
+          "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
@@ -20,7 +21,7 @@ const CartProvider = ({ children }) => {
       const detailedItems = await Promise.all(
         rawCartItems.map(async (item) => {
           try {
-            const productRes = await axios.get(`http://localhost:4000/products/${item.productId}`);
+            const productRes = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/products/${item.productId}`);
             const product = productRes.data;
 
             return {

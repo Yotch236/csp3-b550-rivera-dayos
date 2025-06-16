@@ -40,12 +40,12 @@ const Register = () => {
     }
     setMessage("");
 
-    if(name === "confirmPassword"){
+    if (name === "confirmPassword") {
       validateConfirmPassword(value, formData.password);
     }
   };
 
-   const handleMobileNumberChange = (e) => {
+  const handleMobileNumberChange = (e) => {
     const value = e.target.value;
     const cleanedValue = value.replace(/\D/g, ""); // digits only
 
@@ -63,7 +63,7 @@ const Register = () => {
       setEmailError("");
       return;
     }
-    
+
     const isValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(trimmed);
 
     if (!isValid) {
@@ -90,27 +90,35 @@ const Register = () => {
   };
 
   const validateConfirmPassword = (confirmPwd, originalPwd) => {
-  if (!confirmPwd.trim()) {
-    setConfirmPasswordError("");
-    return;
-  }
+    if (!confirmPwd.trim()) {
+      setConfirmPasswordError("");
+      return;
+    }
 
-  if (confirmPwd !== originalPwd) {
-    setConfirmPasswordError("Passwords do not match");
-  } else {
-    setConfirmPasswordError("");
-  }
-};
+    if (confirmPwd !== originalPwd) {
+      setConfirmPasswordError("Passwords do not match");
+    } else {
+      setConfirmPasswordError("");
+    }
+  };
 
   // Check if all fields are filled and no errors exist
-  const isFormValid =Object.values(formData).every((field) => field.trim() !== "") &&!passwordError &&!emailError &&!confirmPasswordError &&mobileNumber.length === 11;
-
+  const isFormValid =
+    Object.values(formData).every((field) => field.trim() !== "") &&
+    !passwordError &&
+    !emailError &&
+    !confirmPasswordError &&
+    mobileNumber.length === 11;
 
   const userRegister = async (e) => {
     e.preventDefault();
     setLoading(true);
     try {
-      const res = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/users/register`, formData);
+      const res = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/users/register`, formData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       console.log("Registration successful:", res.data);
       // redirect or show message
 
@@ -267,7 +275,7 @@ const Register = () => {
             <Button
               variant="light"
               className="w-100 border d-flex align-items-center justify-content-center gap-2"
-              onClick={() => (window.location.href = "http://localhost:4000/users/google")}
+              onClick={() => (window.location.href = "${process.env.REACT_APP_API_BASE_URL}/users/google")}
             >
               <FcGoogle size={20} />
               Sign up with Google

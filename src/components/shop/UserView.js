@@ -34,7 +34,11 @@ const UserView = ({ products, fetchProducts }) => {
     if (status === "trending") reqBody.sortByTotalSold = true;
 
     try {
-      const res = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/products/search`, reqBody);
+      const res = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/products/search`, reqBody, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       if (res.status === 200) setProductList(res.data);
     } catch (error) {
       console.log("User Search Error", error);
@@ -134,7 +138,7 @@ const UserView = ({ products, fetchProducts }) => {
                     >
                       <div className="product-image-wrapper position-relative">
                         <img
-                          src={`http://localhost:4000${image}`}
+                          src={`${process.env.REACT_APP_API_BASE_URL}${image}`}
                           alt={name}
                           className={`product-image w-100 ${stock === 0 ? "blur-image" : ""}`}
                         />

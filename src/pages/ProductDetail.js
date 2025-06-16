@@ -120,7 +120,7 @@ const ProductDetail = () => {
               onClick={() => setShowImagePopup(true)}
             >
               <img
-                src={`http://localhost:4000${product.image}`}
+                src={`${process.env.REACT_APP_API_BASE_URL}${product.image}`}
                 alt={product.name}
                 className="img-fluid"
                 style={{
@@ -265,7 +265,7 @@ const ProductDetail = () => {
           role="dialog"
           tabIndex={-1}
         >
-          <img src={`http://localhost:4000${product.image}`} alt={product.name} />
+          <img src={`${process.env.REACT_APP_API_BASE_URL}${product.image}`} alt={product.name} />
         </div>
       )}
     </>

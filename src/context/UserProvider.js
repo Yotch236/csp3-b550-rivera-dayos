@@ -27,8 +27,9 @@ const UserProvider = ({ children }) => {
   async function fetchUser(authToken) {
     if (authToken) {
       try {
-        const res = await axios.get(`http://localhost:4000/users/details`, {
+        const res = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/users/details`, {
           headers: {
+            "Content-Type": "application/json",
             Authorization: `Bearer ${authToken}`,
           },
         });

@@ -50,6 +50,7 @@ const Cart = () => {
         { productId, quantity: newQty },
         {
           headers: {
+            "Content-Type": "application/json",
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         }
@@ -66,8 +67,9 @@ const Cart = () => {
     setLocalCartItems((prev) => prev.filter((item) => item.productId !== productId));
 
     try {
-      await axios.delete(`http://localhost:4000/cart/remove/${productId}`, {
+      await axios.delete(`${process.env.REACT_APP_API_BASE_URL}/cart/remove/${productId}`, {
         headers: {
+          "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
@@ -81,10 +83,11 @@ const Cart = () => {
   const clearCart = async () => {
     try {
       await axios.patch(
-        "http://localhost:4000/cart/clear-cart",
+        "${process.env.REACT_APP_API_BASE_URL}/cart/clear-cart",
         {},
         {
           headers: {
+            "Content-Type": "application/json",
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         }
@@ -115,10 +118,11 @@ const Cart = () => {
   const placeOrder = async () => {
     try {
       const res = await axios.post(
-        "http://localhost:4000/orders/",
+        "${process.env.REACT_APP_API_BASE_URL}/orders/",
         {},
         {
           headers: {
+            "Content-Type": "application/json",
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         }
@@ -185,7 +189,7 @@ const Cart = () => {
                   <Row className="align-items-center">
                     <Col xs={12} md={2} className="text-center mb-3 mb-md-0">
                       <Image
-                        src={`http://localhost:4000${item.image}`}
+                        src={`${process.env.REACT_APP_API_BASE_URL}${item.image}`}
                         fluid
                         rounded
                         style={{

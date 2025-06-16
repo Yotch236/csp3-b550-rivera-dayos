@@ -14,7 +14,7 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
 
   const handleGoogleLogin = () => {
-    window.location.href = "http://localhost:4000/users/google";
+    window.location.href = `${process.env.REACT_APP_API_BASE_URL}/users/google`;
   };
 
   const userLogin = async (e) => {
@@ -22,10 +22,18 @@ const Login = () => {
     setLoading(true);
 
     try {
-      const res = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/users/login`, {
-        email,
-        password,
-      });
+      const res = await axios.post(
+        `${process.env.REACT_APP_API_BASE_URL}/users/login`,
+        {
+          email,
+          password,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
 
       // Example: if access is present, assume success
       if (res.data.access) {
@@ -50,7 +58,7 @@ const Login = () => {
       setSuccess(false);
       setMessage("Email or password is incorrect ❌");
       notyf.error("Login failed ❌");
-      setLoading(false);  
+      setLoading(false);
     }
   };
 
@@ -81,8 +89,6 @@ const Login = () => {
                     }}
                   />
                 </Form.Group>
-
-                
 
                 <Form.Group className="mb-3" controlId="formBasicPassword">
                   <Form.Label>Password</Form.Label>
