@@ -10,7 +10,6 @@ const CartProvider = ({ children }) => {
     try {
       const res = await axios.get("${process.env.REACT_APP_API_BASE_URL}/cart/get-cart", {
         headers: {
-          "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });

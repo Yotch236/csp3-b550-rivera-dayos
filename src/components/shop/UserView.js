@@ -34,11 +34,7 @@ const UserView = ({ products, fetchProducts }) => {
     if (status === "trending") reqBody.sortByTotalSold = true;
 
     try {
-      const res = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/products/search`, reqBody, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      const res = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/products/search`, reqBody);
       if (res.status === 200) setProductList(res.data);
     } catch (error) {
       console.log("User Search Error", error);

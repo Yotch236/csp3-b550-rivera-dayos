@@ -29,7 +29,6 @@ const UserProvider = ({ children }) => {
       try {
         const res = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/users/details`, {
           headers: {
-            "Content-Type": "application/json",
             Authorization: `Bearer ${authToken}`,
           },
         });

@@ -3,10 +3,12 @@ import { Navbar, Nav, NavDropdown, Container, Form, FormControl, Button } from "
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
 import UserContext from "../context/UserContext";
-import { FaExclamationCircle } from "react-icons/fa";
+
+import CartContext from "../context/CartContext";
 
 const AppNavbar = () => {
   const { user, unsetUser } = useContext(UserContext);
+  const { fetchCart, setCartItems, setItemCount } = useContext(CartContext);
   console.log(`user in appnavbar.js`, user);
   const navigate = useNavigate();
 
@@ -14,6 +16,9 @@ const AppNavbar = () => {
     // Clear local storage, unset user in context, and redirect to login page
     localStorage.removeItem("token");
     unsetUser();
+    fetchCart();
+    setCartItems([]);
+    setItemCount(0);
     navigate("/login");
   };
 
@@ -30,8 +35,14 @@ const AppNavbar = () => {
         <Navbar.Toggle aria-controls="navbar-top" />
 
         <Navbar.Collapse id="navbar-top" className="justify-content-between mt-3 mt-lg-0">
+          {/* Search Bar */}
+          <Form className="d-flex flex-grow-1 mx-lg-4 mb-3 mb-lg-0" style={{ maxWidth: "600px" }}>
+            <FormControl type="search" placeholder="Search natural handmade items..." className="me-2 rounded" />
+            <Button className="search-button">Search</Button>
+          </Form>
+
           {/* Right Side Links */}
-          <Nav className="d-flex align-items-center gap-3 ms-auto">
+          <Nav className="d-flex align-items-center gap-3">
             <Nav.Link as={Link} to="/" className="woody-link">
               🏠 Home
             </Nav.Link>

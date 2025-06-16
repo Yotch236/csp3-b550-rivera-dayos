@@ -4,8 +4,10 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import CartContext from "../context/CartContext";
 import AddToCartBtn from "../components/AddToCartBtn"; // Make sure path is correct
+import UserContext from "../context/UserContext";
 
 const Trending = () => {
+  const { user } = useContext(UserContext);
   const { cartItems, fetchCart } = useContext(CartContext);
 
   const navigate = useNavigate();
@@ -16,8 +18,11 @@ const Trending = () => {
   }, []);
 
   const fetchTrendingProducts = async () => {
+    const url = user.isAdmin
+      ? "${process.env.REACT_APP_API_BASE_URL}/products/trending"
+      : "${process.env.REACT_APP_API_BASE_URL}/products/active/trending";
     try {
-      const res = await axios.get(`${process.env.REACT_APP_API_BASE_URL}/products/trending`);
+      const res = await axios.get(`${url}`);
       setTrending(res.data);
     } catch (error) {
       console.log(error);

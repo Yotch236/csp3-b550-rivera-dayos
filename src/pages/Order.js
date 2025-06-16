@@ -32,11 +32,9 @@ const Order = () => {
             : `${process.env.REACT_APP_API_BASE_URL}/orders/`;
         const res = await axios.get(url, {
           headers: {
-            "Content-Type": "application/json",
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         });
-
         setTimeout(() => {
           const sortedOrders = res.data.sort(
             (a, b) => new Date(b.orderedOn || b.createdAt) - new Date(a.orderedOn || a.createdAt)

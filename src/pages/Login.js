@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { Navigate } from "react-router-dom";
 import { Notyf } from "notyf";
@@ -14,7 +14,7 @@ const Login = () => {
   const [loading, setLoading] = useState(false);
 
   const handleGoogleLogin = () => {
-    window.location.href = `${process.env.REACT_APP_API_BASE_URL}/users/google`;
+    window.location.href = "${process.env.REACT_APP_API_BASE_URL}/users/google";
   };
 
   const userLogin = async (e) => {
@@ -22,18 +22,10 @@ const Login = () => {
     setLoading(true);
 
     try {
-      const res = await axios.post(
-        `${process.env.REACT_APP_API_BASE_URL}/users/login`,
-        {
-          email,
-          password,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      const res = await axios.post(`${process.env.REACT_APP_API_BASE_URL}/users/login`, {
+        email,
+        password,
+      });
 
       // Example: if access is present, assume success
       if (res.data.access) {
@@ -62,6 +54,10 @@ const Login = () => {
     }
   };
 
+  useEffect(() => {
+    setMessage("");
+  }, [email, password]);
+
   return (
     <Container
       fluid
@@ -85,7 +81,6 @@ const Login = () => {
                     value={email}
                     onChange={(e) => {
                       setEmail(e.target.value);
-                      setMessage("");
                     }}
                   />
                 </Form.Group>
@@ -98,7 +93,6 @@ const Login = () => {
                     value={password}
                     onChange={(e) => {
                       setPassword(e.target.value);
-                      setMessage("");
                     }}
                   />
                 </Form.Group>

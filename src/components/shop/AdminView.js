@@ -28,11 +28,7 @@ const AdminView = ({ products, fetchProducts }) => {
     else if (status === "trending") reqBody.sortByTotalSold = true;
 
     axios
-      .post(`${process.env.REACT_APP_API_BASE_URL}/products/search`, reqBody, {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      })
+      .post(`${process.env.REACT_APP_API_BASE_URL}/products/search`, reqBody)
       .then((res) => {
         if (res.status === 200) setProductList(res.data);
       })
@@ -88,7 +84,6 @@ const AdminView = ({ products, fetchProducts }) => {
 
       const response = await axios.post("${process.env.REACT_APP_API_BASE_URL}/products/", formPayload, {
         headers: {
-          "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
@@ -131,7 +126,6 @@ const AdminView = ({ products, fetchProducts }) => {
     try {
       const response = await axios.delete(`${process.env.REACT_APP_API_BASE_URL}/products/${id}/delete`, {
         headers: {
-          "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
@@ -174,7 +168,6 @@ const AdminView = ({ products, fetchProducts }) => {
         {},
         {
           headers: {
-            "Content-Type": "application/json",
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         }

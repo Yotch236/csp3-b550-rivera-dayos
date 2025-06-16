@@ -123,11 +123,10 @@ const Profile = () => {
     setLoading(true);
     try {
       const res = await axios.patch(
-        `${process.env.REACT_APP_API_BASE_URL}/users/details`,
+        "${process.env.REACT_APP_API_BASE_URL}/users/details",
         { ...formData },
         {
           headers: {
-            "Content-Type": "application/json",
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         }

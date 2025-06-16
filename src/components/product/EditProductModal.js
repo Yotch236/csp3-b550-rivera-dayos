@@ -70,7 +70,7 @@ const EditProductModal = ({ show, onHide, onSave, product }) => {
 
       const res = await axios.patch(`${process.env.REACT_APP_API_BASE_URL}/products/${product._id}/update`, formData, {
         headers: {
-          "Content-Type": "application/json",
+          "Content-Type": "multipart/form-data",
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });

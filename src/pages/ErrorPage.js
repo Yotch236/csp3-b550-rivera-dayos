@@ -28,8 +28,8 @@ export default function Error() {
                         alt="Error illustration" 
                         style={{ maxWidth: '300px', marginBottom: '20px' }} 
                     />
-                    <h1>Lost in Craft?</h1>
-                    <p>Looks like this page wandered off the workshop table. Let's guide you back..</p>
+                    <h1>Oops! Something went wrong.</h1>
+                    <p>The page you are looking for does not exist.</p>
                     <Link to="/" className="btn btn-primary">Back to Home</Link>
                 </Col>
             </Row>

@@ -50,7 +50,6 @@ const Cart = () => {
         { productId, quantity: newQty },
         {
           headers: {
-            "Content-Type": "application/json",
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         }
@@ -69,7 +68,6 @@ const Cart = () => {
     try {
       await axios.delete(`${process.env.REACT_APP_API_BASE_URL}/cart/remove/${productId}`, {
         headers: {
-          "Content-Type": "application/json",
           Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
       });
@@ -87,7 +85,6 @@ const Cart = () => {
         {},
         {
           headers: {
-            "Content-Type": "application/json",
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         }
@@ -122,7 +119,6 @@ const Cart = () => {
         {},
         {
           headers: {
-            "Content-Type": "application/json",
             Authorization: `Bearer ${localStorage.getItem("token")}`,
           },
         }
