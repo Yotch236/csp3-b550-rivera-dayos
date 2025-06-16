@@ -30,14 +30,8 @@ const AppNavbar = () => {
         <Navbar.Toggle aria-controls="navbar-top" />
 
         <Navbar.Collapse id="navbar-top" className="justify-content-between mt-3 mt-lg-0">
-          {/* Search Bar */}
-          <Form className="d-flex flex-grow-1 mx-lg-4 mb-3 mb-lg-0" style={{ maxWidth: "600px" }}>
-            <FormControl type="search" placeholder="Search natural handmade items..." className="me-2 rounded" />
-            <Button className="search-button">Search</Button>
-          </Form>
-
           {/* Right Side Links */}
-          <Nav className="d-flex align-items-center gap-3">
+          <Nav className="d-flex align-items-center gap-3 ms-auto">
             <Nav.Link as={Link} to="/" className="woody-link">
               🏠 Home
             </Nav.Link>
